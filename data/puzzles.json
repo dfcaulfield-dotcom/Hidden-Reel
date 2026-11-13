@@ -1,0 +1,1042 @@
+[
+ {
+  "id": 1,
+  "themes": [
+   "All directorial debuts",
+   "All adapted from stage plays",
+   "The story unfolds over a single day or night",
+   "All Best Picture winners",
+   "All set in New York City",
+   "All shot on a single set"
+  ],
+  "theme": 2,
+  "films": [
+   {
+    "title": "Die Hard",
+    "year": 1988,
+    "clue": "Bruce Willis's New York cop crashes his estranged wife's office Christmas party in a Los Angeles skyscraper, barefoot.",
+    "options": [
+     "Die Hard",
+     "Lethal Weapon",
+     "Speed",
+     "Under Siege"
+    ],
+    "answer": 0,
+    "why": "One Christmas Eve inside Nakatomi Plaza.",
+    "tmdbId": 562,
+    "image": "/bvk2AAH64lP2YZs02Q3jskfHT8j.jpg"
+   },
+   {
+    "title": "Ferris Bueller's Day Off",
+    "year": 1986,
+    "clue": "John Hughes comedy in which a Chicago teenager fakes an illness, borrows a Ferrari and hijacks a parade float.",
+    "options": [
+     "Risky Business",
+     "Weird Science",
+     "Sixteen Candles",
+     "Ferris Bueller's Day Off"
+    ],
+    "answer": 3,
+    "why": "One skipped school day in Chicago.",
+    "tmdbId": 9377,
+    "image": "/jehzP4JKiFzgTWIaASLFOJocJke.jpg"
+   },
+   {
+    "title": "Training Day",
+    "year": 2001,
+    "clue": "Denzel Washington won his Best Actor Oscar as a corrupt LA narcotics detective breaking in a rookie played by Ethan Hawke.",
+    "options": [
+     "Colors",
+     "End of Watch",
+     "Training Day",
+     "Man on Fire"
+    ],
+    "answer": 2,
+    "why": "The rookie's first, and only, day on the job.",
+    "tmdbId": 2034,
+    "image": "/nuO8o9ltxhI7AZQxePavEZ4TyHa.jpg"
+   },
+   {
+    "title": "Before Sunrise",
+    "year": 1995,
+    "clue": "Richard Linklater romance: an American and a French student meet on a train and wander Vienna until his flight home.",
+    "options": [
+     "Before Sunrise",
+     "Midnight in Paris",
+     "Lost in Translation",
+     "Reality Bites"
+    ],
+    "answer": 0,
+    "why": "One night walking around Vienna.",
+    "tmdbId": 76,
+    "image": "/qA2TyqPldTtoTVY3LKrNIG5g6bH.jpg"
+   },
+   {
+    "title": "Do the Right Thing",
+    "year": 1989,
+    "clue": "Spike Lee writes, directs and plays pizza delivery man Mookie on a Brooklyn block during a heatwave.",
+    "options": [
+     "Do the Right Thing",
+     "Mean Streets",
+     "Boyz n the Hood",
+     "Jungle Fever"
+    ],
+    "answer": 0,
+    "why": "The hottest day of the summer.",
+    "tmdbId": 925,
+    "image": "/xnLh9CNRxkpkSNikVhi5qLwcfUG.jpg"
+   },
+   {
+    "title": "12 Angry Men",
+    "year": 1957,
+    "clue": "Henry Fonda is the lone juror holding out for 'not guilty' in a sweltering jury room.",
+    "options": [
+     "12 Angry Men",
+     "Anatomy of a Murder",
+     "To Kill a Mockingbird",
+     "Witness for the Prosecution"
+    ],
+    "answer": 0,
+    "why": "One afternoon of jury deliberation.",
+    "tmdbId": 389,
+    "image": "/qqHQsStV6exghCM7zbObuYBiYxw.jpg"
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "themes": [
+   "All based on novels",
+   "All scored by composer John Williams",
+   "All directed by Steven Spielberg",
+   "All produced by George Lucas",
+   "All won the Oscar for Best Visual Effects",
+   "All set at Christmas"
+  ],
+  "theme": 1,
+  "films": [
+   {
+    "title": "Jaws",
+    "year": 1975,
+    "clue": "The mechanical star of this 1975 blockbuster was nicknamed Bruce, and kept breaking down in the waters off Martha's Vineyard.",
+    "options": [
+     "Jaws",
+     "Piranha",
+     "Orca",
+     "The Deep"
+    ],
+    "answer": 0,
+    "why": "Two notes were enough to win Williams an Oscar.",
+    "tmdbId": 578,
+    "image": "/i1yf91svRHX45l9BXL8rVFzLoPH.jpg"
+   },
+   {
+    "title": "Star Wars",
+    "year": 1977,
+    "clue": "Its opening crawl begins 'It is a period of civil war', and Alec Guinness earned an Oscar nomination as an ageing hermit.",
+    "options": [
+     "Star Wars",
+     "Star Trek: The Motion Picture",
+     "Flash Gordon",
+     "Dune"
+    ],
+    "answer": 0,
+    "why": "The most famous Williams fanfare of all.",
+    "tmdbId": 11,
+    "image": "/zqkmTXzjkAgXmEWLRsY4UpTWCeo.jpg"
+   },
+   {
+    "title": "Home Alone",
+    "year": 1990,
+    "clue": "Eight-year-old Kevin defends his suburban Chicago house from the 'Wet Bandits' at Christmas.",
+    "options": [
+     "Uncle Buck",
+     "Jingle All the Way",
+     "Home Alone",
+     "Problem Child"
+    ],
+    "answer": 2,
+    "why": "Williams wrote 'Somewhere in My Memory' for it.",
+    "tmdbId": 771,
+    "image": "/ih2xVgeMS8R5WUetYE8Mr9hVTlB.jpg"
+   },
+   {
+    "title": "Jurassic Park",
+    "year": 1993,
+    "clue": "Based on a Michael Crichton novel, in which Richard Attenborough's tycoon 'spared no expense' on an island attraction.",
+    "options": [
+     "Jurassic Park",
+     "Westworld",
+     "Congo",
+     "Godzilla"
+    ],
+    "answer": 0,
+    "why": "Williams scored it the same year as Schindler's List.",
+    "tmdbId": 329,
+    "image": "/f082quUW2kAtZXFZVGEfhwacZoG.jpg"
+   },
+   {
+    "title": "Harry Potter and the Sorcerer's Stone",
+    "year": 2001,
+    "clue": "Chris Columbus directed this first trip to a British boarding school reached from Platform 9¾.",
+    "options": [
+     "Percy Jackson & the Olympians: The Lightning Thief",
+     "The Golden Compass",
+     "Harry Potter and the Sorcerer's Stone",
+     "The Chronicles of Narnia: The Lion, the Witch and the Wardrobe"
+    ],
+    "answer": 2,
+    "why": "Williams wrote 'Hedwig's Theme', used across the series.",
+    "tmdbId": 671,
+    "image": "/bfh9Z3Ghz4FOJAfLOAhmc3ccnHU.jpg"
+   },
+   {
+    "title": "Superman",
+    "year": 1978,
+    "clue": "Christopher Reeve's first outing in the cape; the poster promised 'You'll believe a man can fly'.",
+    "options": [
+     "Superman",
+     "The Rocketeer",
+     "Dick Tracy",
+     "Batman"
+    ],
+    "answer": 0,
+    "why": "Its march is another Williams signature.",
+    "tmdbId": 1924,
+    "image": "/5PfHGXosySGs0l1JfeREspy3v6G.jpg"
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "themes": [
+   "All set in Los Angeles",
+   "All remakes of earlier films",
+   "All about cops going undercover",
+   "All built around a heist or robbery",
+   "All directed by British filmmakers",
+   "All based on true stories"
+  ],
+  "theme": 3,
+  "films": [
+   {
+    "title": "Heat",
+    "year": 1995,
+    "clue": "Michael Mann crime epic that put Al Pacino and Robert De Niro in a scene together for the first time, over coffee.",
+    "options": [
+     "Collateral",
+     "Heat",
+     "Ronin",
+     "Casino"
+    ],
+    "answer": 1,
+    "why": "De Niro's crew plans one last bank job.",
+    "tmdbId": 949,
+    "image": "/uI22JkEMediWyiRqhllNqeeGtW0.jpg"
+   },
+   {
+    "title": "Inception",
+    "year": 2010,
+    "clue": "Leonardo DiCaprio leads a team into a sleeping heir's mind; a spinning top has kept audiences arguing ever since.",
+    "options": [
+     "The Matrix",
+     "Tenet",
+     "Inception",
+     "Shutter Island"
+    ],
+    "answer": 2,
+    "why": "A heist in reverse: breaking in to plant an idea.",
+    "tmdbId": 27205,
+    "image": "/8ZTVqvKDQ8emSGUEMjsS4yHAwrp.jpg"
+   },
+   {
+    "title": "The Italian Job",
+    "year": 1969,
+    "clue": "Michael Caine, three Mini Coopers and a Turin traffic jam: 'You're only supposed to blow the bloody doors off!'",
+    "options": [
+     "Alfie",
+     "The Ladykillers",
+     "Get Carter",
+     "The Italian Job"
+    ],
+    "answer": 3,
+    "why": "A gold bullion robbery in Turin.",
+    "tmdbId": 10536,
+    "image": "/jkYdRAhshaRwiRAB4KdDz1Ocj4e.jpg"
+   },
+   {
+    "title": "Baby Driver",
+    "year": 2017,
+    "clue": "Edgar Wright action film whose getaway driver, played by Ansel Elgort, times every chase to his iPod playlist.",
+    "options": [
+     "Gone in 60 Seconds",
+     "Drive",
+     "Hot Fuzz",
+     "Baby Driver"
+    ],
+    "answer": 3,
+    "why": "One getaway job after another.",
+    "tmdbId": 339403,
+    "image": "/yir5430WblZSZuIMd9C6pIZerfA.jpg"
+   },
+   {
+    "title": "Inside Man",
+    "year": 2006,
+    "clue": "Spike Lee thriller: Denzel Washington negotiates with Clive Owen, whose crew has sealed off a Manhattan bank.",
+    "options": [
+     "Inside Man",
+     "The Taking of Pelham 123",
+     "25th Hour",
+     "The Negotiator"
+    ],
+    "answer": 0,
+    "why": "The 'perfect' bank robbery.",
+    "tmdbId": 388,
+    "image": "/tOkSenL74N23O4S7wjJSUHz7Aeh.jpg"
+   },
+   {
+    "title": "Point Break",
+    "year": 1991,
+    "clue": "Kathryn Bigelow sends FBI agent Keanu Reeves undercover among surfers who wear ex-presidents masks to work.",
+    "options": [
+     "Speed",
+     "Point Break",
+     "Bad Boys",
+     "Big Wednesday"
+    ],
+    "answer": 1,
+    "why": "The surfers fund their summers by robbing banks.",
+    "tmdbId": 1089,
+    "image": "/yGOHbICOQwlJ20UjK8F2ChGJjvl.jpg"
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "themes": [
+   "All Best Picture winners",
+   "All released in the 1980s",
+   "All narrated by Morgan Freeman",
+   "All directed by Rob Reiner",
+   "All set in prisons",
+   "All based on stories by Stephen King"
+  ],
+  "theme": 5,
+  "films": [
+   {
+    "title": "The Shining",
+    "year": 1980,
+    "clue": "Stanley Kubrick strands Jack Nicholson as the winter caretaker of the Overlook Hotel.",
+    "options": [
+     "The Shining",
+     "The Amityville Horror",
+     "Poltergeist",
+     "The Changeling"
+    ],
+    "answer": 0,
+    "why": "From King's 1977 novel. He famously disliked the film.",
+    "tmdbId": 694,
+    "image": "/AdKA2F1SzYPhSZdEbjH1Zh75UVQ.jpg"
+   },
+   {
+    "title": "Stand by Me",
+    "year": 1986,
+    "clue": "Four boys in 1959 Oregon follow the railway tracks to find a dead body; Richard Dreyfuss narrates.",
+    "options": [
+     "Stand by Me",
+     "My Girl",
+     "The Sandlot",
+     "The Goonies"
+    ],
+    "answer": 0,
+    "why": "From King's novella 'The Body'.",
+    "tmdbId": 235,
+    "image": "/yjGllQUm28R4X9xD9T5xMszirgw.jpg"
+   },
+   {
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "clue": "Tim Robbins's banker spends two decades in a Maine prison with a rock hammer and a Rita Hayworth poster.",
+    "options": [
+     "The Shawshank Redemption",
+     "Escape from Alcatraz",
+     "Cool Hand Luke",
+     "Dead Man Walking"
+    ],
+    "answer": 0,
+    "why": "From King's novella 'Rita Hayworth and Shawshank Redemption'.",
+    "tmdbId": 278,
+    "image": "/pNjh59JSxChQktamG3LMp9ZoQzp.jpg"
+   },
+   {
+    "title": "Misery",
+    "year": 1990,
+    "clue": "Kathy Bates won an Oscar as the 'number one fan' who rescues a novelist from a car wreck.",
+    "options": [
+     "Fatal Attraction",
+     "The Hand That Rocks the Cradle",
+     "Fried Green Tomatoes",
+     "Misery"
+    ],
+    "answer": 3,
+    "why": "From King's 1987 novel.",
+    "tmdbId": 1700,
+    "image": "/rUAn3Ul1tL7JXMjZ951UOI3F0UA.jpg"
+   },
+   {
+    "title": "Carrie",
+    "year": 1976,
+    "clue": "Brian De Palma horror starring Sissy Spacek, ending in cinema's most disastrous prom night.",
+    "options": [
+     "Prom Night",
+     "Halloween",
+     "The Exorcist",
+     "Carrie"
+    ],
+    "answer": 3,
+    "why": "From King's first published novel.",
+    "tmdbId": 7340,
+    "image": "/zwJFfKQdfiptK2GY6N8GkZFrAxJ.jpg"
+   },
+   {
+    "title": "The Green Mile",
+    "year": 1999,
+    "clue": "Tom Hanks is a Depression-era death-row guard who meets a gentle giant with a healing gift.",
+    "options": [
+     "The Green Mile",
+     "Forrest Gump",
+     "The Hurricane",
+     "Sling Blade"
+    ],
+    "answer": 0,
+    "why": "From King's six-part serial novel.",
+    "tmdbId": 497,
+    "image": "/amZavErrjrdgDwhsIdpWxHNenIx.jpg"
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "themes": [
+   "All shot in black and white",
+   "All directorial debuts",
+   "All told out of chronological order",
+   "All directed by Christopher Nolan",
+   "All won the Oscar for Best Original Screenplay",
+   "All set in Los Angeles"
+  ],
+  "theme": 2,
+  "films": [
+   {
+    "title": "Pulp Fiction",
+    "year": 1994,
+    "clue": "Palme d'Or winner featuring a glowing briefcase, a five-dollar milkshake and a twist contest at Jack Rabbit Slim's.",
+    "options": [
+     "Get Shorty",
+     "Pulp Fiction",
+     "Jackie Brown",
+     "True Romance"
+    ],
+    "answer": 1,
+    "why": "Its three stories are shuffled, and it ends in the middle.",
+    "tmdbId": 680,
+    "image": "/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg"
+   },
+   {
+    "title": "Memento",
+    "year": 2000,
+    "clue": "Guy Pearce hunts his wife's killer using Polaroids and tattoos, because he can't form new memories.",
+    "options": [
+     "Fight Club",
+     "Insomnia",
+     "Memento",
+     "The Machinist"
+    ],
+    "answer": 2,
+    "why": "Its colour scenes run backwards.",
+    "tmdbId": 77,
+    "image": "/7Wev9JMo6R5XAfz2KDvXb7oPMmy.jpg"
+   },
+   {
+    "title": "(500) Days of Summer",
+    "year": 2009,
+    "clue": "Joseph Gordon-Levitt's greeting-card writer falls for Zooey Deschanel; the narrator warns 'this is not a love story'.",
+    "options": [
+     "Yes Man",
+     "(500) Days of Summer",
+     "Garden State",
+     "Ruby Sparks"
+    ],
+    "answer": 1,
+    "why": "It jumps around the 500 days by number.",
+    "tmdbId": 19913,
+    "image": "/1M2i4Mxd03elGOTmEkIvqrHfmyS.jpg"
+   },
+   {
+    "title": "Eternal Sunshine of the Spotless Mind",
+    "year": 2004,
+    "clue": "Charlie Kaufman script in which Jim Carrey hires a firm called Lacuna to wipe Kate Winslet from his memory.",
+    "options": [
+     "Vanilla Sky",
+     "The Truman Show",
+     "Eternal Sunshine of the Spotless Mind",
+     "Being John Malkovich"
+    ],
+    "answer": 2,
+    "why": "The romance plays in reverse as memories are erased.",
+    "tmdbId": 38,
+    "image": "/95qi5TJMIBI5VzWHia88Pbrye7Z.jpg"
+   },
+   {
+    "title": "Dunkirk",
+    "year": 2017,
+    "clue": "A 2017 account of a 1940 evacuation, told from land, sea and air with very little dialogue.",
+    "options": [
+     "Darkest Hour",
+     "Dunkirk",
+     "1917",
+     "Saving Private Ryan"
+    ],
+    "answer": 1,
+    "why": "A week, a day and an hour are interwoven.",
+    "tmdbId": 374720,
+    "image": "/pTwF9hLkqAtuOqXMdOyPwz4AgnI.jpg"
+   },
+   {
+    "title": "Citizen Kane",
+    "year": 1941,
+    "clue": "Orson Welles's first film, in which a reporter tries to decode a dying tycoon's last word.",
+    "options": [
+     "Citizen Kane",
+     "It's a Wonderful Life",
+     "The Magnificent Ambersons",
+     "Sunset Boulevard"
+    ],
+    "answer": 0,
+    "why": "A life pieced together from overlapping flashbacks.",
+    "tmdbId": 15,
+    "image": "/ruF3Lmd4A8MHbnEBE6lxPMbsHGL.jpg"
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "themes": [
+   "All adapted from Broadway musicals",
+   "All Best Picture winners",
+   "All based on true stories",
+   "All set in Florida",
+   "All remakes of earlier films",
+   "All directorial debuts"
+  ],
+  "theme": 4,
+  "films": [
+   {
+    "title": "The Departed",
+    "year": 2006,
+    "clue": "Martin Scorsese finally won his directing Oscar for this Boston tale of a mole in the police and a mole in the mob.",
+    "options": [
+     "Mystic River",
+     "Gangs of New York",
+     "The Departed",
+     "The Town"
+    ],
+    "answer": 2,
+    "why": "A remake of Hong Kong's Infernal Affairs (2002).",
+    "tmdbId": 1422,
+    "image": "/6WRrGYalXXveItfpnipYdayFkQB.jpg"
+   },
+   {
+    "title": "Ocean's Eleven",
+    "year": 2001,
+    "clue": "Steven Soderbergh sends George Clooney and Brad Pitt after three Las Vegas casinos in one night.",
+    "options": [
+     "Snatch",
+     "Casino",
+     "The Score",
+     "Ocean's Eleven"
+    ],
+    "answer": 3,
+    "why": "A remake of the 1960 Rat Pack film.",
+    "tmdbId": 161,
+    "image": "/ncoqdHs1poUaBqyKic9YI8ai7MP.jpg"
+   },
+   {
+    "title": "Scarface",
+    "year": 1983,
+    "clue": "Al Pacino's Cuban refugee rises through Miami's cocaine trade: 'Say hello to my little friend!'",
+    "options": [
+     "Goodfellas",
+     "Carlito's Way",
+     "Blow",
+     "Scarface"
+    ],
+    "answer": 3,
+    "why": "A remake of Howard Hawks's 1932 gangster film.",
+    "tmdbId": 111,
+    "image": "/cCvp5Sni75agCtyJkNOMapORUQV.jpg"
+   },
+   {
+    "title": "The Birdcage",
+    "year": 1996,
+    "clue": "Robin Williams and Nathan Lane run a South Beach drag club and must impress a conservative senator played by Gene Hackman.",
+    "options": [
+     "The Birdcage",
+     "Mrs. Doubtfire",
+     "In & Out",
+     "To Wong Foo, Thanks for Everything! Julie Newmar"
+    ],
+    "answer": 0,
+    "why": "A remake of La Cage aux Folles (1978).",
+    "tmdbId": 11000,
+    "image": "/yNOtXSNep1BLnfZ0yhLejm1TULi.jpg"
+   },
+   {
+    "title": "A Star Is Born",
+    "year": 2018,
+    "clue": "Bradley Cooper's first film as director, with Lady Gaga singing the Oscar-winning 'Shallow'.",
+    "options": [
+     "A Star Is Born",
+     "Bohemian Rhapsody",
+     "La La Land",
+     "Crazy Heart"
+    ],
+    "answer": 0,
+    "why": "The fourth version of a story first filmed in 1937.",
+    "tmdbId": 332562,
+    "image": "/dDYpjrwh1wNVQk0rEpc9P81wQt4.jpg"
+   },
+   {
+    "title": "The Fly",
+    "year": 1986,
+    "clue": "David Cronenberg body horror: Jeff Goldblum's scientist tests his teleportation pods on himself. 'Be afraid. Be very afraid.'",
+    "options": [
+     "Scanners",
+     "Altered States",
+     "Re-Animator",
+     "The Fly"
+    ],
+    "answer": 3,
+    "why": "A remake of the 1958 Vincent Price film.",
+    "tmdbId": 9426,
+    "image": "/g1FzhbtWYKk9WMJYi1X26kf2Q4Q.jpg"
+   }
+  ]
+ },
+ {
+  "id": 7,
+  "themes": [
+   "One actor plays more than one character",
+   "All sequels",
+   "All feature time travel",
+   "All based on TV sketches",
+   "All directed by their star",
+   "All remakes of earlier films"
+  ],
+  "theme": 0,
+  "films": [
+   {
+    "title": "Dr. Strangelove",
+    "year": 1964,
+    "clue": "Stanley Kubrick's Cold War satire: 'Gentlemen, you can't fight in here! This is the War Room!'",
+    "options": [
+     "The Manchurian Candidate",
+     "M*A*S*H",
+     "Dr. Strangelove",
+     "Fail Safe"
+    ],
+    "answer": 2,
+    "why": "Peter Sellers plays three roles.",
+    "tmdbId": 935,
+    "image": "/7i0L2ee4Iy0aXV6vR5u1ZmblOrx.jpg"
+   },
+   {
+    "title": "The Nutty Professor",
+    "year": 1996,
+    "clue": "Eddie Murphy's Professor Sherman Klump invents a slimming formula and unleashes Buddy Love.",
+    "options": [
+     "Big Momma's House",
+     "Flubber",
+     "Doctor Dolittle",
+     "The Nutty Professor"
+    ],
+    "answer": 3,
+    "why": "Murphy plays seven characters, including most of the Klump family.",
+    "tmdbId": 9327,
+    "image": "/gHFuLHxruielBcMEZx1WowxbRWS.jpg"
+   },
+   {
+    "title": "The Parent Trap",
+    "year": 1998,
+    "clue": "Nancy Meyers's first film as director: two girls meet at summer camp and plot to reunite their divorced parents.",
+    "options": [
+     "Father of the Bride",
+     "Freaky Friday",
+     "The Parent Trap",
+     "It Takes Two"
+    ],
+    "answer": 2,
+    "why": "Lindsay Lohan plays both twins.",
+    "tmdbId": 9820,
+    "image": "/hz6NQHZG9vAdSpwG1qeTCKHupO3.jpg"
+   },
+   {
+    "title": "Austin Powers: International Man of Mystery",
+    "year": 1997,
+    "clue": "A cryogenically frozen 1960s British spy thaws in the '90s to face a villain demanding 'one million dollars'.",
+    "options": [
+     "Austin Powers: International Man of Mystery",
+     "Spy Hard",
+     "Wayne's World",
+     "Johnny English"
+    ],
+    "answer": 0,
+    "why": "Mike Myers plays both Austin and Dr. Evil.",
+    "tmdbId": 816,
+    "image": "/wSm5McaHSAyOx4gGRYdlDHzj00y.jpg"
+   },
+   {
+    "title": "The Social Network",
+    "year": 2010,
+    "clue": "David Fincher and Aaron Sorkin's account of a Harvard dorm-room startup and the lawsuits that followed.",
+    "options": [
+     "The Big Short",
+     "The Social Network",
+     "Moneyball",
+     "Steve Jobs"
+    ],
+    "answer": 1,
+    "why": "Armie Hammer plays both Winklevoss twins.",
+    "tmdbId": 37799,
+    "image": "/1PXwh3nJzgRkkYnqfWInJNypeL4.jpg"
+   },
+   {
+    "title": "Back to the Future Part II",
+    "year": 1989,
+    "clue": "Sequel featuring hoverboards, self-lacing sneakers and a sports almanac, set partly in 2015.",
+    "options": [
+     "Total Recall",
+     "Honey, I Shrunk the Kids",
+     "Back to the Future Part II",
+     "Bill & Ted's Excellent Adventure"
+    ],
+    "answer": 2,
+    "why": "Michael J. Fox plays Marty, his son and his daughter.",
+    "tmdbId": 165,
+    "image": "/w6tPctxWAsHoQXeKxxNOT6lYKpx.jpg"
+   }
+  ]
+ },
+ {
+  "id": 8,
+  "themes": [
+   "All directed by brothers",
+   "All Best Picture winners",
+   "All set at Thanksgiving or Christmas",
+   "All buddy-cop comedies",
+   "All road trip movies",
+   "All based on true stories"
+  ],
+  "theme": 4,
+  "films": [
+   {
+    "title": "Little Miss Sunshine",
+    "year": 2006,
+    "clue": "A family pushes a broken yellow VW bus towards a California children's beauty pageant; Alan Arkin won an Oscar.",
+    "options": [
+     "Captain Fantastic",
+     "Juno",
+     "The Royal Tenenbaums",
+     "Little Miss Sunshine"
+    ],
+    "answer": 3,
+    "why": "Albuquerque to Redondo Beach by VW bus.",
+    "tmdbId": 773,
+    "image": "/twdtjJm31AExNx73DXaD4KRNU9c.jpg"
+   },
+   {
+    "title": "Thelma & Louise",
+    "year": 1991,
+    "clue": "Ridley Scott directs Geena Davis and Susan Sarandon in a 1966 Thunderbird, with an early role for Brad Pitt.",
+    "options": [
+     "A League of Their Own",
+     "Boys on the Side",
+     "Wild at Heart",
+     "Thelma & Louise"
+    ],
+    "answer": 3,
+    "why": "A weekend getaway that turns into a run for Mexico.",
+    "tmdbId": 1541,
+    "image": "/u49EZzHvGCNrHdQxkc3hhLmQEPP.jpg"
+   },
+   {
+    "title": "Rain Man",
+    "year": 1988,
+    "clue": "Best Picture winner: Tom Cruise discovers a brother who refuses to fly and must be back in time for Judge Wapner.",
+    "options": [
+     "Rain Man",
+     "Cocktail",
+     "Scent of a Woman",
+     "Awakenings"
+    ],
+    "answer": 0,
+    "why": "Cincinnati to Los Angeles in a 1949 Buick.",
+    "tmdbId": 380,
+    "image": "/b3tos7Tsd6lsTe52Nn4TMrEQg65.jpg"
+   },
+   {
+    "title": "Planes, Trains and Automobiles",
+    "year": 1987,
+    "clue": "Steve Martin just wants to get home to Chicago for Thanksgiving; John Candy sells shower curtain rings.",
+    "options": [
+     "The Great Outdoors",
+     "Parenthood",
+     "Planes, Trains and Automobiles",
+     "Trading Places"
+    ],
+    "answer": 2,
+    "why": "New York to Chicago, the long way.",
+    "tmdbId": 2609,
+    "image": "/4f8JBqvWyPObKTrjvJnp9BeOUyY.jpg"
+   },
+   {
+    "title": "Dumb and Dumber",
+    "year": 1994,
+    "clue": "Jim Carrey and Jeff Daniels drive a dog-shaped van to Aspen to return a briefcase.",
+    "options": [
+     "Ace Ventura: Pet Detective",
+     "There's Something About Mary",
+     "Dumb and Dumber",
+     "Billy Madison"
+    ],
+    "answer": 2,
+    "why": "Providence to Aspen in the Mutt Cutts van.",
+    "tmdbId": 8467,
+    "image": "/8uBTDGRcNHhYChcoazP5rleRME7.jpg"
+   },
+   {
+    "title": "Green Book",
+    "year": 2018,
+    "clue": "Best Picture winner with Viggo Mortensen as a bouncer chauffeuring pianist Mahershala Ali in 1962.",
+    "options": [
+     "Green Book",
+     "Driving Miss Daisy",
+     "Hidden Figures",
+     "The Help"
+    ],
+    "answer": 0,
+    "why": "A concert tour through the Deep South.",
+    "tmdbId": 490132,
+    "image": "/5En0fmDagt3Pk8d7P3uTwfeQceg.jpg"
+   }
+  ]
+ },
+ {
+  "id": 9,
+  "themes": [
+   "All directed by Alfred Hitchcock",
+   "All have no musical score",
+   "All set in New York City",
+   "All based on true stories",
+   "Set almost entirely in one location",
+   "All have a single credited actor"
+  ],
+  "theme": 4,
+  "films": [
+   {
+    "title": "Rear Window",
+    "year": 1954,
+    "clue": "Hitchcock thriller: James Stewart, laid up with a broken leg, passes the time watching his neighbours through a telephoto lens.",
+    "options": [
+     "North by Northwest",
+     "Strangers on a Train",
+     "Rear Window",
+     "Vertigo"
+    ],
+    "answer": 2,
+    "why": "We never leave the apartment and its courtyard.",
+    "tmdbId": 567,
+    "image": "/5bN06p5OwRUEqcfrtNs5egV16yb.jpg"
+   },
+   {
+    "title": "The Breakfast Club",
+    "year": 1985,
+    "clue": "A brain, an athlete, a basket case, a princess and a criminal serve Saturday detention.",
+    "options": [
+     "The Breakfast Club",
+     "Pretty in Pink",
+     "Fast Times at Ridgemont High",
+     "St. Elmo's Fire"
+    ],
+    "answer": 0,
+    "why": "One school library.",
+    "tmdbId": 2108,
+    "image": "/s5HDOmFZaPVQFjk9BxxDrLu1T0g.jpg"
+   },
+   {
+    "title": "Panic Room",
+    "year": 2002,
+    "clue": "David Fincher thriller with Jodie Foster and a young Kristen Stewart hiding from burglars in their new Manhattan home.",
+    "options": [
+     "The Game",
+     "Flightplan",
+     "Panic Room",
+     "Red Eye"
+    ],
+    "answer": 2,
+    "why": "One brownstone, mostly one room.",
+    "tmdbId": 4547,
+    "image": "/gJfd2SzUsvY1q1iszthJ3ryuvEA.jpg"
+   },
+   {
+    "title": "Phone Booth",
+    "year": 2003,
+    "clue": "Colin Farrell answers a ringing public phone in Manhattan and is told he'll be shot if he hangs up.",
+    "options": [
+     "Phone Booth",
+     "Cellular",
+     "S.W.A.T.",
+     "Collateral"
+    ],
+    "answer": 0,
+    "why": "One phone booth on 53rd Street.",
+    "tmdbId": 1817,
+    "image": "/7JI7LrqD53rRVUBC0hoce65bDpb.jpg"
+   },
+   {
+    "title": "Clue",
+    "year": 1985,
+    "clue": "Tim Curry's butler hosts a murderous dinner party in this comedy based on a board game, released with three different endings.",
+    "options": [
+     "Clue",
+     "Young Frankenstein",
+     "Spaceballs",
+     "Murder on the Orient Express"
+    ],
+    "answer": 0,
+    "why": "One mansion on a stormy night.",
+    "tmdbId": 15196,
+    "image": "/rsclb1vtH6IkxmVBuCC37biEBT.jpg"
+   },
+   {
+    "title": "Buried",
+    "year": 2010,
+    "clue": "Ryan Reynolds is the only actor on screen: a truck driver in Iraq who wakes up underground with a mobile phone.",
+    "options": [
+     "Green Zone",
+     "127 Hours",
+     "Buried",
+     "The Hurt Locker"
+    ],
+    "answer": 2,
+    "why": "One coffin, for the entire running time.",
+    "tmdbId": 26388,
+    "image": "/ju2i7Is6T4d6u4abdgXsHYkcg2d.jpg"
+   }
+  ]
+ },
+ {
+  "id": 10,
+  "themes": [
+   "All have twist endings",
+   "There's a number in every title",
+   "All directed by David Fincher",
+   "All science fiction",
+   "All based on true stories",
+   "All set in space"
+  ],
+  "theme": 1,
+  "films": [
+   {
+    "title": "Se7en",
+    "year": 1995,
+    "clue": "David Fincher's rain-soaked thriller with Brad Pitt and Morgan Freeman: 'What's in the box?'",
+    "options": [
+     "Zodiac",
+     "Se7en",
+     "The Bone Collector",
+     "Kiss the Girls"
+    ],
+    "answer": 1,
+    "why": "Seven.",
+    "tmdbId": 807,
+    "image": "/jwBs4djVIe9Kz3Vu9rsI9aEEKWU.jpg"
+   },
+   {
+    "title": "The Sixth Sense",
+    "year": 1999,
+    "clue": "M. Night Shyamalan's breakthrough: 'I see dead people.'",
+    "options": [
+     "Stir of Echoes",
+     "The Sixth Sense",
+     "The Others",
+     "Unbreakable"
+    ],
+    "answer": 1,
+    "why": "Six.",
+    "tmdbId": 745,
+    "image": "/6TjllWT3cGrPFyqDXurVZ3L8bBi.jpg"
+   },
+   {
+    "title": "Apollo 13",
+    "year": 1995,
+    "clue": "Ron Howard dramatises a 1970 NASA mission: 'Houston, we have a problem.'",
+    "options": [
+     "Gravity",
+     "The Right Stuff",
+     "First Man",
+     "Apollo 13"
+    ],
+    "answer": 3,
+    "why": "Thirteen.",
+    "tmdbId": 568,
+    "image": "/n0FDJI9c0uWiZwm8wgXVjaMBn96.jpg"
+   },
+   {
+    "title": "District 9",
+    "year": 2009,
+    "clue": "Neill Blomkamp's first feature: stranded aliens nicknamed 'prawns' are confined to a Johannesburg camp.",
+    "options": [
+     "District 9",
+     "Cloverfield",
+     "Elysium",
+     "Children of Men"
+    ],
+    "answer": 0,
+    "why": "Nine.",
+    "tmdbId": 17654,
+    "image": "/jhM3wgWUrrOkz9r4xwV5cV5RhI4.jpg"
+   },
+   {
+    "title": "2001: A Space Odyssey",
+    "year": 1968,
+    "clue": "Stanley Kubrick science fiction: 'I'm sorry, Dave. I'm afraid I can't do that.'",
+    "options": [
+     "2001: A Space Odyssey",
+     "Silent Running",
+     "Solaris",
+     "Planet of the Apes"
+    ],
+    "answer": 0,
+    "why": "Two thousand and one.",
+    "tmdbId": 62,
+    "image": "/w5IDXtifKntw0ajv2co7jFlTQDM.jpg"
+   },
+   {
+    "title": "8 Mile",
+    "year": 2002,
+    "clue": "Eminem plays a Detroit factory worker in rap battles; 'Lose Yourself' won the Oscar.",
+    "options": [
+     "8 Mile",
+     "Get Rich or Die Tryin'",
+     "Hustle & Flow",
+     "Straight Outta Compton"
+    ],
+    "answer": 0,
+    "why": "Eight.",
+    "tmdbId": 65,
+    "image": "/jNG7pl0DkN1nzxnbZj4MCGf2VEG.jpg"
+   }
+  ]
+ }
+]

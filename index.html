@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hidden Reel — the daily movie puzzle</title>
+<meta name="description" content="Six films, one hidden link. A daily movie puzzle.">
+<meta name="theme-color" content="#14110f">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://image.tmdb.org">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn" id="btn-help" aria-label="How to play">?</button>
+  <div class="brand">
+    <h1>Hidden Reel</h1>
+    <p id="puzzle-label">&nbsp;</p>
+  </div>
+  <div class="top-actions">
+    <button class="icon-btn" id="btn-archive" aria-label="Archive">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v4H4zM6 9v10h12V9M10 13h4"/></svg>
+    </button>
+    <button class="icon-btn" id="btn-stats" aria-label="Your stats">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20V10M12 20V4M19 20v-7"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="game" hidden>
+  <section class="stage" aria-live="polite">
+    <div class="frame" id="frame">
+      <img id="still" alt="" draggable="false">
+      <span class="frame-tag" id="frame-tag"></span>
+    </div>
+    <div class="reveal" id="reveal" hidden>
+      <h2 id="reveal-title"></h2>
+      <p id="reveal-note"></p>
+    </div>
+    <p class="clue" id="clue"></p>
+    <div class="options" id="options"></div>
+    <button class="primary" id="btn-next" hidden>Next film</button>
+  </section>
+
+  <nav class="strip" id="strip" aria-label="Films in this puzzle"></nav>
+
+  <section class="link-bar" id="link-bar">
+    <div>
+      <strong>What links all six films?</strong>
+      <span id="link-hint"></span>
+    </div>
+    <button class="primary" id="btn-link">Guess the link</button>
+  </section>
+
+  <section class="results" id="results" hidden>
+    <p class="eyebrow">The link</p>
+    <h2 id="res-theme"></h2>
+    <div class="score-row">
+      <div class="score"><span id="res-score"></span><small>/100</small></div>
+      <div class="score-detail">
+        <p id="res-grid" class="grid-line"></p>
+        <p id="res-link"></p>
+      </div>
+    </div>
+    <ol class="why" id="res-why"></ol>
+    <button class="primary wide" id="btn-share">Share result</button>
+    <p class="next-up" id="next-up"></p>
+  </section>
+</main>
+
+<p class="load-error" id="load-error" hidden>Couldn't load today's puzzle. Check your connection and reload.</p>
+
+<footer>
+  <p>Film stills from <a href="https://www.themoviedb.org/" target="_blank" rel="noopener">TMDB</a>.
+  This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+</footer>
+
+<dialog id="dlg-link">
+  <form method="dialog">
+    <h2>What links all six films?</h2>
+    <p class="dlg-sub" id="link-sub"></p>
+    <div class="options" id="link-options"></div>
+    <button class="ghost wide" value="cancel">Not yet</button>
+  </form>
+</dialog>
+
+<dialog id="dlg-help">
+  <form method="dialog">
+    <h2>How to play</h2>
+    <ol class="help">
+      <li><b>Six blurred frames.</b> Each comes with a clue. Pick the film it describes. You get two tries: 10 points first time, 5 on the second.</li>
+      <li><b>Every film is a clue.</b> Right or wrong, the frame comes into focus and the title is revealed.</li>
+      <li><b>Find the hidden link.</b> All six films share something. You get one guess, and it's worth more the earlier you make it: 40 points after two films, down to 16 after all six.</li>
+    </ol>
+    <p class="dlg-sub">You don't need to have seen them all. A new puzzle arrives every day at midnight.</p>
+    <button class="primary wide">Play</button>
+  </form>
+</dialog>
+
+<dialog id="dlg-stats">
+  <form method="dialog">
+    <h2>Your stats</h2>
+    <div class="stat-grid" id="stat-grid"></div>
+    <div class="meter" aria-hidden="true"><i id="stat-meter"></i></div>
+    <p class="dlg-sub" id="stat-sub"></p>
+    <button class="ghost wide">Close</button>
+  </form>
+</dialog>
+
+<dialog id="dlg-archive">
+  <form method="dialog">
+    <h2>Archive</h2>
+    <ul class="archive" id="archive-list"></ul>
+    <button class="ghost wide">Close</button>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="app.js" type="module"></script>
+</body>
+</html>
