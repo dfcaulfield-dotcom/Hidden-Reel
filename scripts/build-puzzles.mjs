@@ -1,65 +1,76 @@
 #!/usr/bin/env node
-// Builds data/puzzles.json from puzzles/source.mjs, looking up a textless
-// still for each film on TMDB. Needs a TMDB API Read Access Token:
-//   TMDB_TOKEN=eyJ... node scripts/build-puzzles.mjs
-// The token is only used here; it never ships with the game.
-import { writeFile, readFile } from 'node:fs/promises';
-import source from '../puzzles/source.mjs';
+// Turns puzzles/source.json into the files the game loads:
+//   data/puzzles.json  the puzzles
+//   data/films.json    film titles for the answer search
+//   data/people.json   people names for the answer search
+// Every puzzle is re-checked to have exactly one solution within the pool.
+//   TMDB_TOKEN=... node scripts/build-puzzles.mjs
+import { loadPool, buildGrid, isUnique, tmdb, pooled, readJson, writeJson, LINK_JOBS, enumerate } from './lib.mjs';
 
-const TOKEN = process.env.TMDB_TOKEN || 'set-TMDB_TOKEN';
-const OUT = new URL('../data/puzzles.json', import.meta.url);
-
-async function tmdb(path) {
-  const res = await fetch('https://api.themoviedb.org/3' + path, {
-    headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/json' },
-  });
-  if (!res.ok) throw new Error(`TMDB ${res.status} for ${path}`);
-  return res.json();
-}
-
-// Deterministic shuffle so rebuilding doesn't reorder options under players.
-function shuffle(items, seed) {
-  let s = seed >>> 0;
-  const rand = () => ((s = (Math.imul(s, 1664525) + 1013904223) >>> 0) / 2 ** 32);
-  const a = [...items];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+const pool = await loadPool();
+const source = await readJson('puzzles/source.json');
+const prev = new Map((await readJson('.cache/persons.json', [])).map((p) => [p.id, p]));
+const person = async (id) => {
+  if (!prev.has(id)) {
+    const p = await tmdb(`/person/${id}`);
+    prev.set(id, { id, name: p.name, born: parseInt(p.birthday) || null, profile: p.profile_path });
   }
-  return a;
-}
-const hash = (str) => [...str].reduce((h, c) => (Math.imul(h, 31) + c.charCodeAt(0)) >>> 0, 7);
+  return prev.get(id);
+};
 
-let previous = [];
-try { previous = JSON.parse(await readFile(OUT, 'utf8')); } catch {}
-const known = new Map(previous.flatMap((p) => p.films.map((f) => [`${f.title}|${f.year}`, f])));
+const words = (t) => t.toLowerCase().match(/[a-z0-9]{4,}/g) ?? [];
+function filmHint(f) {
+  const base = `${f.genres.slice(0, 3).join(', ')} · ${f.runtime} min`;
+  const leaks = f.tagline && words(f.title).some((w) => f.tagline.toLowerCase().includes(w));
+  return f.tagline && !leaks ? `${base}. Tagline: “${f.tagline.replace(/[.]$/, '')}.”` : base;
+}
+function personHint(id, grid) {
+  const inGrid = new Set(grid.films.map((f) => f.id));
+  for (const f of pool.list) {
+    if (inGrid.has(f.id)) continue;
+    if (f.dirSet.has(id)) return `Also directed ${f.title} (${f.year}).`;
+    if (f.cast.slice(0, 5).some((c) => c[0] === id)) return `Also starred in ${f.title} (${f.year}).`;
+  }
+  return 'No other well-known credit in our film pool.';
+}
 
 const puzzles = [];
-for (const [i, p] of source.entries()) {
-  const films = [];
-  for (const [title, year, clue, decoys, why] of p.films) {
-    let { tmdbId, image } = known.get(`${title}|${year}`) ?? {};
-    if (!image) {
-      const { results } = await tmdb(`/search/movie?query=${encodeURIComponent(title)}&include_adult=false`);
-      const match = results
-        .filter((r) => r.release_date)
-        .sort((a, b) =>
-          Math.abs(parseInt(a.release_date) - year) - Math.abs(parseInt(b.release_date) - year) ||
-          b.popularity - a.popularity)[0];
-      if (!match || Math.abs(parseInt(match.release_date) - year) > 1) throw new Error(`No TMDB match for ${title} (${year})`);
-      const { backdrops } = await tmdb(`/movie/${match.id}/images?include_image_language=null`);
-      const still = backdrops.filter((b) => b.iso_639_1 === null && b.aspect_ratio > 1.7)[0];
-      if (!still) throw new Error(`No textless still for ${title}`);
-      tmdbId = match.id;
-      image = still.file_path;
-      console.log(`${title} (${year}) -> ${match.title} [${match.release_date}] ${image}`);
-    }
-    const options = shuffle([title, ...decoys], hash(title));
-    films.push({ title, year, clue, options, answer: options.indexOf(title), why, tmdbId, image });
-  }
-  const themes = shuffle(p.themes, hash(p.themes[0]));
-  puzzles.push({ id: i + 1, themes, theme: themes.indexOf(p.themes[0]), films });
-}
+for (const [i, src] of source.entries()) {
+  const g = buildGrid(pool, src.films, src.link);
+  if (!g) throw new Error(`Puzzle ${i + 1}: films don't form a connected grid`);
+  if (!isUnique(pool, g)) throw new Error(`Puzzle ${i + 1}: more than one solution`);
 
-await writeFile(OUT, JSON.stringify(puzzles, null, 1) + '\n');
-console.log(`Wrote ${puzzles.length} puzzles.`);
+  // The link: how the hidden person is credited, and anyone else off the grid who is on all five.
+  const creditIn = (f, id) => f.crew.find((c) => c[0] === id && LINK_JOBS[c[1]])?.[1] ?? (f.anyCast.has(id) ? 'actor' : f.dirSet.has(id) ? 'director' : null);
+  const jobs = g.films.map((f) => creditIn(f, src.link));
+  if (jobs.some((j) => !j)) throw new Error(`Puzzle ${i + 1}: link is not on all five films`);
+  const job = jobs.every((j) => j === 'actor') ? 'actor' : LINK_JOBS[jobs.find((j) => j !== 'actor')];
+  const everyone = (f) => new Set([...f.dirSet, ...f.anyCast, ...f.crew.map((c) => c[0])]);
+  const also = [...everyone(g.films[0])].filter((id) => id !== src.link && !g.people.includes(id) && g.films.every((f) => everyone(f).has(id)));
+
+  const link = await person(src.link);
+  const people = await pooled(g.people, 4, person);
+  puzzles.push({
+    id: i + 1,
+    films: g.films.map((f) => ({ id: f.id, title: f.title, year: f.year, enum: f.enum, poster: f.poster, backdrop: f.backdrop, hint: filmHint(f) })),
+    people: people.map((p) => ({ ...p, enum: enumerate(p.name), hint: personHint(p.id, g) })),
+    cells: g.cells,
+    link: {
+      ...link, enum: enumerate(link.name), job, accept: [src.link, ...also],
+      hint: job === 'actor' ? 'They act in all five films, never in the lead.' : `They were the ${job} on all five films.`,
+    },
+  });
+  console.log(`${i + 1}. ${link.name} (${job})${also.length ? ' also: ' + also.map((id) => pool.people[id][0]).join(', ') : ''}`);
+}
+await writeJson('.cache/persons.json', [...prev.values()]);
+await writeJson('data/puzzles.json', puzzles, true);
+
+// Answer search lists. People: anyone with two or more credits in the pool, plus every answer.
+const credits = new Map();
+for (const f of pool.list) for (const id of new Set([...f.directors, ...f.cast.slice(0, 12).map((c) => c[0]), ...f.crew.map((c) => c[0])])) credits.set(id, (credits.get(id) ?? 0) + 1);
+const answers = new Set(puzzles.flatMap((p) => [...p.people.map((x) => x.id), ...p.link.accept]));
+const names = [...credits].filter(([id, n]) => n >= 2 || answers.has(id))
+  .sort((a, b) => b[1] - a[1]).map(([id]) => [id, pool.people[id][0]]);
+await writeJson('data/people.json', names);
+await writeJson('data/films.json', pool.list.map((f) => [f.id, f.title, f.year]));
+console.log(`Wrote ${puzzles.length} puzzles, ${pool.list.length} films, ${names.length} people.`);

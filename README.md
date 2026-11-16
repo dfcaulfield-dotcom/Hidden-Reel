@@ -1,7 +1,12 @@
 # Hidden Reel
 
-A daily movie puzzle. Six blurred film frames, each with a trivia clue. Name the
-films to bring them into focus, then work out the hidden link all six share.
+A daily film deduction puzzle. Each puzzle is a grid of real film credits with
+the names removed: five films, the directors and actors who connect them, and
+one more person who worked on all five but isn't on the grid. Work out all of it.
+
+You get each film's year and the shape of its title, each person's birth year
+and the shape of their name, and a grid showing who directed or acted in what.
+Every puzzle has exactly one solution.
 
 ## Play locally
 
@@ -11,22 +16,30 @@ It is a static site with no build step. Serve the folder and open it:
 
 ## Scoring
 
-- Each film: 10 points on the first try, 5 on the second.
-- The link: one guess, worth 40 points after one or two films, then 34, 28, 22
-  and 16 as more films are revealed.
-- Stats (completion %, average, streak) are stored in the browser's localStorage.
+You start with 100 points. A wrong guess costs 2, a hint costs 5 and revealing
+an answer costs 10. Solving everything unaided keeps all 100. There is no timer.
+Stats (completion %, average, streak) are stored in the browser's localStorage.
 
-## Adding puzzles
+## Making puzzles
 
-1. Add a puzzle to `puzzles/source.mjs` (the format is described at the top).
-2. Run `TMDB_TOKEN=<your API Read Access Token> node scripts/build-puzzles.mjs`
-   to look up stills and regenerate `data/puzzles.json`.
+The scripts need a TMDB API Read Access Token in `TMDB_TOKEN`. It is only used
+here and never ships with the game.
 
-Puzzle 1 is released on the date set by `EPOCH` in `app.js`, and one more
-unlocks each day after that. The TMDB token is only used by the build script
-and is never shipped with the game.
+1. `node scripts/pool.mjs` downloads the film pool (the roughly 3,000 most-voted
+   films on TMDB, with credits) into `.cache/`.
+2. `node scripts/suggest.mjs [seed]` prints candidate puzzles that have exactly
+   one solution within the pool.
+3. Copy the JSON line of the ones you like into `puzzles/source.json`.
+4. `node scripts/build-puzzles.mjs` re-checks every puzzle and writes the files
+   in `data/` that the game loads.
+
+Puzzle No. 1 is released on the date set by `EPOCH` in `app.js`, and one more
+unlocks each day after that.
+
+"Exactly one solution" means within the film pool, where "acted in" means one
+of a film's ten top-billed actors.
 
 ## Credits
 
-Film stills from [TMDB](https://www.themoviedb.org/). This product uses the TMDB
-API but is not endorsed or certified by TMDB.
+Film data and images from [TMDB](https://www.themoviedb.org/). This product uses
+the TMDB API but is not endorsed or certified by TMDB.
