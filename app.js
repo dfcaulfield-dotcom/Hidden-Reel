@@ -1,4 +1,4 @@
-// Hidden Reel — a daily film deduction puzzle. No build step, no backend.
+// Match Cut — a daily film deduction puzzle. No build step, no backend.
 // Progress and stats are kept in this browser's localStorage.
 
 const EPOCH = new Date(2026, 10, 14); // local midnight of puzzle No. 1
@@ -417,7 +417,7 @@ function openArchive() {
 
 // ---------- share ----------
 async function share() {
-  const text = `Hidden Reel No. ${puzzle.id}\n${shareGrid(state, puzzle)}\n${score(state)}/100\n${location.origin}${location.pathname}`;
+  const text = `Match Cut No. ${puzzle.id}\n${shareGrid(state, puzzle)}\n${score(state)}/100\n${location.origin}${location.pathname}`;
   try {
     if (navigator.share && matchMedia('(pointer: coarse)').matches) { await navigator.share({ text }); return; }
     await navigator.clipboard.writeText(text);

@@ -1,4 +1,4 @@
-# Hidden Reel
+# Match Cut
 
 A daily film deduction puzzle. Each puzzle shows five films and the directors
 and actors who connect them, with every name removed. Lines between them are
