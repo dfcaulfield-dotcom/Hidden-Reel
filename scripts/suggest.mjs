@@ -14,13 +14,25 @@ const TRIES = Number(process.env.TRIES ?? 400);
 
 const links = new Map(); // person -> Set(film ids they directed or are billed in)
 const add = (id, film) => { if (!links.has(id)) links.set(id, new Set()); links.get(id).add(film.id); };
-for (const f of pool.list.slice(0, 2000)) {
+// Films a film buff will have come across: widely seen and well regarded, or
+// simply huge. Mostly from 1986 on; older films only if they are landmarks.
+const SINCE = 1986;
+const eligible = (f, rank) => rank < 2200 && !f.genres.includes('Documentary')
+  && (f.rating >= 6.5 || rank < 300) && (f.year >= SINCE || rank < 600);
+for (const [rank, f] of pool.list.entries()) {
+  if (!eligible(f, rank)) continue;
   f.directors.forEach((id) => add(id, f));
   f.cast.slice(0, 12).forEach(([id]) => add(id, f));
 }
 
 const keys = new Map();
 const keyOf = (f) => keys.get(f.id) ?? keys.set(f.id, new Set([...f.directors, ...f.cast.slice(0, 8).map((c) => c[0])])).get(f.id);
+
+// One tile must have more lines than any other, so there is a natural way in.
+function hub(g) {
+  const deg = [...g.films.map((_, i) => g.cells.filter((c) => c[0] === i).length), ...g.people.map((_, i) => g.cells.filter((c) => c[1] === i).length)].sort((a, b) => b - a);
+  return deg[0] >= 3 && deg[0] > deg[1];
+}
 
 const out = [];
 for (const [linkId, set] of links) {
@@ -46,8 +58,9 @@ for (const [linkId, set] of links) {
     }
     // Variety: at least three directors, no franchise twice, a spread of years.
     if (!ok || Math.max(...dirs.values()) > 2 || dirs.size < 3 || new Set(pick.map((f) => f.year)).size < 4) continue;
+    if (pick.filter((f) => f.year < SINCE).length > 1) continue;
     const g = buildGrid(pool, pick.map((f) => f.id), linkId);
-    if (!g || !isUnique(pool, g)) continue;
+    if (!g || !hub(g) || !isUnique(pool, g)) continue;
     const score = g.films.reduce((n, f) => n + Math.log(f.votes), 0) + dirs.size * 2 + g.cells.length * 0.3;
     if (!best || score > best.score) best = { score, g };
   }

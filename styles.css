@@ -55,7 +55,7 @@ main { display: flex; flex-direction: column; }
 
 /* ----- the board ----- */
 .board {
-  position: relative; display: grid; grid-template-columns: 112px 1fr 112px; align-items: stretch;
+  position: relative; display: grid; grid-template-columns: 128px 1fr 112px; align-items: stretch;
   background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px;
 }
 #wires { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
@@ -77,12 +77,8 @@ main { display: flex; flex-direction: column; }
 .poster img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .poster .year { font-family: Limelight, Georgia, serif; font-size: 24px; line-height: 1; margin-top: 14px; }
 .poster .chip { position: absolute; left: 5px; top: 5px; z-index: 1; }
-.poster .tag {
-  position: absolute; right: 0; top: 7px; background: var(--gold); color: var(--gold-ink);
-  font-size: 10px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; border-radius: 4px 0 0 4px; text-transform: uppercase;
-}
 .face {
-  position: relative; display: grid; place-items: center; width: 78px; height: 78px; margin: 0 auto 5px;
+  position: relative; display: grid; place-items: center; width: 96px; height: 96px; margin: 0 auto 5px;
   border-radius: 50%; background: var(--panel-2); border: 2px dashed var(--line);
   font-family: Limelight, Georgia, serif; font-size: 26px;
 }
@@ -93,8 +89,6 @@ main { display: flex; flex-direction: column; }
 .card.solved .poster, .card.solved .face { border: 2px solid var(--good); }
 .card.revealed .poster, .card.revealed .face { border: 2px solid var(--bad); }
 .card.open .poster, .card.open .face { border-color: var(--muted); }
-.card.start .poster { border: 2px solid var(--gold); box-shadow: 0 0 0 3px rgba(245,185,66,.25), 0 0 22px rgba(245,185,66,.35); }
-.card.locked .poster > :not(.chip), .card.locked .face > :not(.chip), .card.locked .cap { opacity: .45; }
 .card.selected .poster, .card.selected .face { outline: 3px solid var(--text); outline-offset: 2px; }
 .chip {
   display: inline-grid; place-items: center; min-width: 24px; height: 24px; border-radius: 6px;
@@ -121,8 +115,6 @@ main { display: flex; flex-direction: column; }
 .link-card .body { flex: 1; min-width: 0; }
 .link-card strong { display: block; font-family: Limelight, Georgia, serif; font-weight: 400; font-size: 18px; color: var(--gold); }
 .link-card .sub { display: block; font-size: 13px; color: var(--muted); }
-.link-card.locked { border-color: var(--line); }
-.link-card.locked .face, .link-card.locked .shape { opacity: .45; }
 .link-card.selected { outline: 3px solid var(--text); outline-offset: 2px; }
 
 /* ----- solve panel: a sheet on phones, a fixed column on wide screens ----- */
@@ -133,11 +125,10 @@ main { display: flex; flex-direction: column; }
 }
 .panel:not(.is-open) { display: none; }
 .panel h2 { font-size: 24px; color: var(--gold); margin-bottom: 6px; }
-.locked-note { margin: 12px 0 0; padding: 10px 12px; border-radius: 10px; background: var(--panel-2); color: var(--muted); font-size: 14px; }
 .facts li.free { color: var(--gold); }
 
 @media (min-width: 900px) {
-  header.top, main, footer { max-width: 1060px; }
+  header.top, main, footer { max-width: 1280px; }
   main { display: grid; grid-template-columns: minmax(0, 1fr) 350px; gap: 20px; align-items: start; }
   .side { display: flex; flex-direction: column; gap: 14px; position: sticky; top: 12px; max-height: calc(100dvh - 24px); overflow: auto; }
   .results { order: 0; margin: 0; }
@@ -146,9 +137,11 @@ main { display: flex; flex-direction: column; }
   .group { flex-direction: row; justify-content: space-around; }
   .films { grid-column: auto; grid-row: 1; }
   .people { grid-column: auto; grid-row: 3; align-items: flex-start; }
-  .films .card { width: 124px; }
-  .people .card { width: 104px; }
-  .face { width: 88px; height: 88px; }
+  .films .card { flex: 1; max-width: 158px; }
+  .films { gap: 14px; }
+  .people .card { width: 132px; }
+  .face { width: 112px; height: 112px; }
+  .board { grid-template-rows: auto 84px auto; }
   .scrim { display: none; }
   .panel, .panel:not(.is-open) { display: block; position: static; max-height: none; overflow: visible; }
   #item-close { display: none; }
@@ -166,7 +159,7 @@ dialog h2 { font-size: 24px; color: var(--gold); margin-bottom: 8px; }
 .facts li.hint { color: var(--gold); }
 .facts .chip { margin: 0 2px; min-width: 20px; height: 20px; font-size: 12px; }
 #item-solved { display: flex; gap: 12px; align-items: center; margin-bottom: 6px; }
-#item-solved img { width: 132px; border-radius: 8px; flex: none; }
+#item-solved img { width: 150px; border-radius: 8px; flex: none; }
 #item-solved img.round { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; }
 #item-answer { font-size: 20px; font-weight: 700; margin: 0; }
 #item-answer small { display: block; font-size: 13px; font-weight: 500; color: var(--muted); }

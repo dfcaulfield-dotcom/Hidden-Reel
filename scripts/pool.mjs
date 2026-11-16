@@ -9,9 +9,11 @@ const prev = await readJson('.cache/pool.json', { films: [], people: {} });
 const have = new Map(prev.films.map((f) => [f.id, f]));
 const people = prev.people;
 
-const ids = (await pooled([...Array(pages).keys()], 8, (i) =>
+const listed = (await pooled([...Array(pages).keys()], 8, (i) =>
   tmdb(`/discover/movie?sort_by=vote_count.desc&include_adult=false&page=${i + 1}`)))
-  .flatMap((r) => r.results.map((m) => m.id));
+  .flatMap((r) => r.results);
+const ids = listed.map((m) => m.id);
+const rating = new Map(listed.map((m) => [m.id, m.vote_average]));
 
 let n = 0;
 const films = await pooled([...new Set(ids)], 10, async (id) => {
@@ -30,6 +32,7 @@ const films = await pooled([...new Set(ids)], 10, async (id) => {
   };
 });
 
+for (const f of films) f.rating = rating.get(f.id) ?? f.rating ?? null;
 const out = films.filter((f) => f.year && f.directors.length && f.cast.length >= 4).sort((a, b) => b.votes - a.votes);
 await writeJson('.cache/pool.json', { films: out, people });
 console.log(`Pool: ${out.length} films, ${Object.keys(people).length} people.`);

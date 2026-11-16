@@ -24,12 +24,6 @@ function filmHint(f) {
   const leaks = f.tagline && words(f.title).some((w) => f.tagline.toLowerCase().includes(w));
   return f.tagline && !leaks ? `${base}. Tagline: “${f.tagline.trim()}”` : `${base}.`;
 }
-// The free clue on the starting film: genre, tagline and the two lead characters.
-function starterClue(f) {
-  const leaks = (text) => words(f.title).some((w) => text.toLowerCase().includes(w));
-  const chars = f.cast.slice(0, 4).map((c) => (c[1] ?? '').replace(/\(.*?\)/g, '').split(' / ').map((x) => x.trim()).find((x) => x && !leaks(x))).filter(Boolean).slice(0, 2);
-  return `${filmHint(f)}${chars.length ? ` Lead characters: ${chars.join(' and ')}.` : ''}`;
-}
 function personHint(id, grid) {
   const inGrid = new Set(grid.films.map((f) => f.id));
   for (const f of pool.list) {
@@ -56,20 +50,16 @@ for (const [i, src] of source.entries()) {
     : acts === 5 ? `Acts in all five films, and directed ${directed.map((f) => f.title).join(' and ')}`
     : `Directed ${directed.map((f) => f.title).join(' and ')}, and acts in the other${acts > 1 ? 's' : ''}`;
 
-  // The starting film: the best known of the five, with a free clue.
-  const start = g.films.indexOf(g.films.reduce((a, f) => (f.votes > a.votes ? f : a)));
-
   const link = await person(src.link);
   const people = await pooled(g.people, 4, person);
   puzzles.push({
     id: i + 1,
-    start,
-    films: g.films.map((f, fi) => ({ id: f.id, title: f.title, year: f.year, enum: f.enum, poster: f.poster, backdrop: f.backdrop, hint: fi === start ? starterClue(f) : filmHint(f) })),
+    films: g.films.map((f) => ({ id: f.id, title: f.title, year: f.year, enum: f.enum, poster: f.poster, backdrop: f.backdrop, hint: filmHint(f) })),
     people: people.map((p) => ({ ...p, enum: enumerate(p.name), hint: personHint(p.id, g) })),
     cells: g.cells,
     link: { ...link, enum: enumerate(link.name), role, accept: [src.link, ...also], hint: `Born in ${link.born}. ${personHint(src.link, g)}` },
   });
-  console.log(`${i + 1}. ${link.name} | start: ${g.films[start].title} | ${puzzles.at(-1).films[start].hint}${also.length ? ' also: ' + also.map((id) => pool.people[id][0]).join(', ') : ''}`);
+  console.log(`${i + 1}. ${link.name}: ${role}${also.length ? ' also: ' + also.map((id) => pool.people[id][0]).join(', ') : ''}`);
 }
 await writeJson('.cache/persons.json', [...prev.values()]);
 await writeJson('data/puzzles.json', puzzles, true);

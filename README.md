@@ -6,10 +6,11 @@ real credits. One more actor or director is credited on all five films but
 isn't shown: that's the missing name. Work out all of it.
 
 You get each film's year and the shape of its title, and each person's birth
-year and the shape of their name. One film is marked as the start and comes
-with a free clue. Each answer unlocks whatever it is connected to, and the
-missing name unlocks once all five films are found. Every puzzle has exactly
-one solution.
+year and the shape of their name. Nothing is locked and nothing says where to
+begin; in every puzzle one tile has more lines than any other, which makes it
+the natural way in. Every puzzle has exactly one solution.
+
+Puzzles draw on widely seen, well-rated films, mostly from 1986 onwards.
 
 ## Play locally
 

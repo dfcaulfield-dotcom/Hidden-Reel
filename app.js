@@ -4,7 +4,7 @@
 const EPOCH = new Date(2026, 10, 14); // local midnight of puzzle No. 1
 const DAY = 86400000;
 const IMG = 'https://image.tmdb.org/t/p/';
-const STORE_KEY = 'hiddenreel:v3';
+const STORE_KEY = 'hiddenreel:v4';
 const COST = { wrong: 2, hint: 5, reveal: 10 };
 const LETTERS = 'ABCDE';
 
@@ -67,17 +67,6 @@ function commit() {
   save();
 }
 
-// ---------- rules ----------
-// The starting film is open from the outset. Anything else opens once
-// something it is connected to has been found. The missing name opens last.
-function unlocked(slot) {
-  const done = (key) => isDone(state.items[key]);
-  if (done(slot.key)) return true;
-  if (slot.kind === 'link') return puzzle.films.every((_, i) => done(`f${i}`));
-  if (slot.kind === 'film') return slot.i === puzzle.start || puzzle.cells.some((c) => c[0] === slot.i && done(`p${c[1]}`));
-  return puzzle.cells.some((c) => c[1] === slot.i && done(`f${c[0]}`));
-}
-
 // ---------- small render helpers ----------
 function shape(enumeration) {
   const s = el('span', { className: 'shape' });
@@ -100,27 +89,25 @@ let selected = null;
 function render() {
   const all = slots();
   const it = (s) => state.items[s.key];
-  const stateClass = (s) => `${isDone(it(s)) ? it(s).status : unlocked(s) ? 'open' : 'locked'} ${s.key === selected ? 'selected' : ''}`;
+  const stateClass = (s) => `${isDone(it(s)) ? it(s).status : 'open'} ${s.key === selected ? 'selected' : ''}`;
 
   const card = (s) => {
     const done = isDone(it(s));
     const src = done && image(s, s.kind === 'film' ? 'w342' : 'w185');
-    const isStart = s.kind === 'film' && s.i === puzzle.start && !done;
-    const b = el('button', { type: 'button', className: `card ${stateClass(s)} ${isStart ? 'start' : ''}` });
+    const b = el('button', { type: 'button', className: `card ${stateClass(s)}` });
     b.dataset.key = s.key;
     if (s.kind === 'film') {
       b.append(el('span', { className: 'poster' },
         filmChip(s.i),
         src ? el('img', { src, alt: '' }) : null,
-        isStart ? el('span', { className: 'tag', textContent: 'Start' }) : null,
         !src ? el('span', { className: 'year', textContent: s.data.year }) : null,
         !src ? (done ? el('span', { className: 'cap name', textContent: s.data.title }) : shape(s.data.enum)) : null));
-      b.setAttribute('aria-label', done ? `Film ${LETTERS[s.i]}: ${s.data.title}, ${s.data.year}` : `Film ${LETTERS[s.i]}, ${s.data.year}, ${unlocked(s) ? 'unsolved' : 'locked'}`);
+      b.setAttribute('aria-label', done ? `Film ${LETTERS[s.i]}: ${s.data.title}, ${s.data.year}` : `Film ${LETTERS[s.i]}, ${s.data.year}, unsolved`);
     } else {
       b.append(el('span', { className: 'face' }, personChip(s.i), src ? el('img', { src, alt: '' }) : '?'),
         done ? el('span', { className: 'cap name', textContent: s.data.name }) : shape(s.data.enum),
         el('span', { className: 'cap', textContent: `b. ${s.data.born ?? '?'}` }));
-      b.setAttribute('aria-label', done ? `Person ${s.i + 1}: ${s.data.name}` : `Person ${s.i + 1}, born ${s.data.born}, ${unlocked(s) ? 'unsolved' : 'locked'}`);
+      b.setAttribute('aria-label', done ? `Person ${s.i + 1}: ${s.data.name}` : `Person ${s.i + 1}, born ${s.data.born}, unsolved`);
     }
     b.onclick = () => select(s.key);
     return b;
@@ -136,7 +123,7 @@ function render() {
     el('span', { className: 'body' },
       el('strong', { textContent: linkDone ? link.data.name : 'The missing name' }),
       linkDone ? null : shape(link.data.enum),
-      el('span', { className: 'sub', textContent: linkDone ? link.data.role : unlocked(link) ? 'An actor or director credited on all five films.' : 'An actor or director credited on all five films. Unlocks when you have all five.' })));
+      el('span', { className: 'sub', textContent: linkDone ? link.data.role : 'An actor or director credited on all five films, but not shown above.' })));
   lb.onclick = () => select('link');
   $('link-slot').replaceChildren(lb);
 
@@ -235,8 +222,6 @@ function renderPanel() {
   if (!slot) return;
   const it = state.items[selected];
   const done = isDone(it);
-  const open = unlocked(slot);
-  const isStart = slot.kind === 'film' && slot.i === puzzle.start;
   $('item-title').textContent = slot.label;
 
   $('item-solved').hidden = !done;
@@ -246,7 +231,7 @@ function renderPanel() {
     $('item-image').className = slot.kind === 'film' ? '' : 'round';
     if (src) $('item-image').src = src;
     $('item-answer').replaceChildren(answerText(slot),
-      el('small', { textContent: it.status === 'revealed' ? 'Revealed' : it.wrong.length || (it.hint && !isStart) ? 'Solved with help' : 'Solved' }));
+      el('small', { textContent: it.status === 'revealed' ? 'Revealed' : it.wrong.length || it.hint ? 'Solved with help' : 'Solved' }));
   }
 
   const facts = [];
@@ -255,7 +240,6 @@ function renderPanel() {
     fact(`Released in ${slot.data.year}`);
     if (!done) facts.push(el('li', {}, 'Title: ', shape(slot.data.enum)));
     creditLine(slot).forEach((t) => fact(t));
-    if (isStart) fact(`Starting clue: ${slot.data.hint}`, 'free');
   } else if (slot.kind === 'person') {
     fact(`Born in ${slot.data.born ?? 'an unknown year'}`);
     if (!done) facts.push(el('li', {}, 'Name: ', shape(slot.data.enum)));
@@ -265,23 +249,19 @@ function renderPanel() {
     fact('Not one of the numbered people.');
     if (!done) facts.push(el('li', {}, 'Name: ', shape(slot.data.enum)));
   }
-  if (it.hint && !isStart) fact(`Hint: ${slot.data.hint}`, 'hint');
+  if (it.hint) fact(`Hint: ${slot.data.hint}`, 'hint');
   $('item-facts').replaceChildren(...facts);
 
-  $('item-locked').hidden = done || open;
-  $('item-locked').textContent = slot.kind === 'link' ? 'Locked until you have found all five films.'
-    : `Locked. Find a ${slot.kind === 'film' ? 'person' : 'film'} connected to this one first.`;
-  $('item-entry').hidden = done || !open;
-  if (!done && open) {
+  $('item-entry').hidden = done;
+  if (!done) {
     const index = slot.kind === 'film' ? filmIndex : peopleIndex;
     const byId = new Map(index.map((r) => [r.id, r]));
     $('item-wrong').replaceChildren(...it.wrong.map((id) => el('li', { textContent: byId.get(id)?.label ?? '?' })));
     $('item-input').placeholder = slot.kind === 'film' ? 'Search film titles' : 'Search names';
-    $('item-hint').hidden = isStart;
     $('item-hint').textContent = it.hint ? 'Hint used' : `Hint · −${COST.hint}`;
     $('item-hint').disabled = it.hint;
     const armed = $('item-reveal').dataset.armed === selected;
-    $('item-reveal').textContent = armed ? 'Tap again to reveal' : `Reveal · −${it.hint && !isStart ? COST.reveal - COST.hint : COST.reveal}`;
+    $('item-reveal').textContent = armed ? 'Tap again to reveal' : `Reveal · −${it.hint ? COST.reveal - COST.hint : COST.reveal}`;
     renderSuggestions();
   }
 }
@@ -308,19 +288,20 @@ function renderSuggestions() {
   const fresh = found.filter((r) => !it.wrong.includes(r.id));
   if (!fresh.length) return box.replaceChildren(el('li', { className: 'none', textContent: 'No matches.' }));
   box.replaceChildren(...fresh.map((r) => {
-    const b = el('button', { type: 'button' }, r.name, r.year ? el('small', { textContent: ` (${r.year})` }) : null);
-    b.onclick = () => guess(r.id);
+    const b = el('button', { type: 'button', textContent: r.name });
+    b.onclick = () => guess(r);
     return el('li', {}, b);
   }));
 }
 
-function guess(id) {
+function guess(pick) {
   const slot = slots().find((s) => s.key === selected);
   const it = state.items[selected];
-  if (isDone(it) || !unlocked(slot)) return;
-  const right = slot.kind === 'link' ? slot.data.accept.includes(id) : slot.data.id === id;
+  if (isDone(it)) return;
+  // Films are guessed by title alone, so a remake and its original count as the same guess.
+  const right = (slot.kind === 'link' ? slot.data.accept : [slot.data.id]).some((id) => pick.ids.includes(id));
   if (right) it.status = 'solved';
-  else { it.wrong.push(id); toast(`Not ${slot.kind === 'link' ? 'the missing name' : slot.label}. −${COST.wrong}`); }
+  else { it.wrong.push(pick.id); toast(`Not ${slot.kind === 'link' ? 'the missing name' : slot.label}. −${COST.wrong}`); }
   $('item-input').value = '';
   const was = state.finished;
   commit(); render();
@@ -353,7 +334,7 @@ wide.addEventListener('change', () => { if (wide.matches && !selected) pickDefau
 
 // On wide screens the panel is always showing, so point it at the next thing to solve.
 function pickDefault() {
-  const next = slots().find((s) => !isDone(state.items[s.key]) && unlocked(s)) ?? slots().at(-1);
+  const next = slots().find((s) => !isDone(state.items[s.key])) ?? slots().at(-1);
   selected = next.key;
 }
 
@@ -466,10 +447,16 @@ for (const d of document.querySelectorAll('dialog')) {
 }
 
 const getJson = async (url) => { const r = await fetch(url); if (!r.ok) throw new Error(url); return r.json(); };
-const indexOf = (rows) => rows.map(([id, name, year]) => {
-  const n = norm(name);
-  return { id, name, year, norm: n, words: n.split(' '), label: year ? `${name} (${year})` : name };
-});
+// Search entries, one per distinct title or name (years are deliberately left out).
+const indexOf = (rows) => {
+  const seen = new Map();
+  for (const [id, name] of rows) {
+    const n = norm(name);
+    if (seen.has(n)) seen.get(n).ids.push(id);
+    else seen.set(n, { id, ids: [id], name, norm: n, words: n.split(' '), label: name });
+  }
+  return [...seen.values()];
+};
 try {
   const [p, f, n] = await Promise.all(['puzzles', 'films', 'people'].map((x) => getJson(`data/${x}.json`)));
   puzzles = p; filmIndex = indexOf(f); peopleIndex = indexOf(n);
