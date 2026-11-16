@@ -100,6 +100,7 @@ function render() {
       b.append(el('span', { className: 'poster' },
         filmChip(s.i),
         src ? el('img', { src, alt: '' }) : null,
+        src ? el('span', { className: 'year-badge', textContent: s.data.year }) : null,
         !src ? el('span', { className: 'year', textContent: s.data.year }) : null,
         !src ? (done ? el('span', { className: 'cap name', textContent: s.data.title }) : shape(s.data.enum)) : null));
       b.setAttribute('aria-label', done ? `Film ${LETTERS[s.i]}: ${s.data.title}, ${s.data.year}` : `Film ${LETTERS[s.i]}, ${s.data.year}, unsolved`);
@@ -340,26 +341,19 @@ function pickDefault() {
 
 // ---------- results ----------
 const emoji = (it) => (it.status === 'revealed' ? '⬛' : it.wrong.length || it.hint ? '🟨' : '🟩');
-function shareGrid(s, p) {
+// One row of squares per group: films A to E, people in order, then the missing name.
+function tally(s, p) {
   const all = slots(p);
-  const line = (kind) => all.filter((x) => x.kind === kind).map((x) => emoji(s.items[x.key])).join('');
-  return `🎬 ${line('film')}\n👤 ${line('person')}\n🔗 ${line('link')}`;
+  const row = (kind) => all.filter((x) => x.kind === kind).map((x) => emoji(s.items[x.key])).join('');
+  return [['Films', row('film')], ['People', row('person')], ['Missing name', row('link')]];
 }
 
 function renderResults() {
   $('results').hidden = !state.finished;
   if (!state.finished) return;
-  const link = puzzle.link;
-  $('res-portrait').hidden = !link.profile;
-  if (link.profile) $('res-portrait').src = `${IMG}w185${link.profile}`;
-  $('res-portrait').alt = link.name;
-  $('res-name').textContent = link.name;
-  $('res-job').textContent = link.role;
-  $('res-stills').replaceChildren(...puzzle.films.map((f) => el('figure', {},
-    f.backdrop ? el('img', { src: `${IMG}w780${f.backdrop}`, alt: '', loading: 'lazy' }) : null,
-    el('figcaption', { textContent: `${f.title} (${f.year})` }))));
   $('res-score').textContent = score(state);
-  $('res-grid').textContent = shareGrid(state, puzzle);
+  $('res-grid').replaceChildren(...tally(state, puzzle).flatMap(([label, squares]) =>
+    [el('dt', { textContent: label }), el('dd', { textContent: squares })]));
   const more = dayNumber() < puzzles.length;
   $('next-up').textContent = puzzle.id !== released() ? 'From the archive.'
     : more ? `Next puzzle in ${countdown()}.` : 'You\'re all caught up. More puzzles are on the way.';
@@ -417,7 +411,8 @@ function openArchive() {
 
 // ---------- share ----------
 async function share() {
-  const text = `Match Cut No. ${puzzle.id}\n${shareGrid(state, puzzle)}\n${score(state)}/100\n${location.origin}${location.pathname}`;
+  const rows = tally(state, puzzle).map(([label, squares]) => `${label} ${squares}`).join('\n');
+  const text = `Match Cut No. ${puzzle.id} · ${score(state)}/100\n${rows}\n${location.origin}${location.pathname}`;
   try {
     if (navigator.share && matchMedia('(pointer: coarse)').matches) { await navigator.share({ text }); return; }
     await navigator.clipboard.writeText(text);

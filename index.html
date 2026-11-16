@@ -47,19 +47,10 @@
 
   <div class="side">
     <section class="results" id="results" hidden>
-      <p class="eyebrow">The missing name</p>
-      <div class="link-reveal">
-        <img id="res-portrait" alt="">
-        <div>
-          <h2 id="res-name"></h2>
-          <p id="res-job"></p>
-        </div>
-      </div>
-      <div class="stills" id="res-stills"></div>
-      <div class="score-row">
-        <div class="score"><span id="res-score"></span><small>/100</small></div>
-        <pre class="grid-line" id="res-grid"></pre>
-      </div>
+      <p class="eyebrow">Puzzle complete</p>
+      <div class="score"><span id="res-score"></span><small>/100</small></div>
+      <dl class="tally" id="res-grid"></dl>
+      <p class="key">🟩 unaided · 🟨 with a wrong guess or hint · ⬛ revealed</p>
       <button class="primary wide" id="btn-share">Share result</button>
       <p class="next-up" id="next-up"></p>
     </section>
@@ -98,15 +89,14 @@
 <dialog id="dlg-help">
   <form method="dialog">
     <h2>How to play</h2>
-    <p>Five films and the people who made them, with every name removed. Work out all of it.</p>
-    <ol class="help">
-      <li><b>Lines are credits.</b> A gold line means that person directed that film. A pale line means they acted in it (among the ten top-billed). No line means no credit at all.</li>
-      <li><b>You get the shapes.</b> Each film shows its year and the letter count of its title. Each person shows a birth year and the letter count of their name.</li>
-      <li><b>Find your own way in.</b> Nothing is locked and nothing tells you where to begin. The tile with the most lines is the most pinned down, so it's usually the place to start.</li>
-      <li><b>Find the missing name.</b> One more actor or director is credited on all five films but isn't shown. Guess it whenever you think you know.</li>
-    </ol>
-    <p>Every puzzle has exactly one solution. There's no clock, so take your time; pen and paper help.</p>
-    <p class="dlg-sub">You start with 100 points. A wrong guess costs 2, a hint costs 5, and revealing an answer costs 10. Solve everything unaided and you keep all 100.</p>
+    <p>Name five films, the people who connect them, and one missing name.</p>
+    <ul class="help">
+      <li>A <b>gold line</b> means that person directed the film. A <b>pale line</b> means they acted in it. No line means no credit.</li>
+      <li>Each film shows its year and the letter count of its title. Each person shows their birth year and the letter count of their name.</li>
+      <li>The <b>missing name</b> is an actor or director credited on all five films.</li>
+    </ul>
+    <p>Every puzzle has one solution, and there is no time limit.</p>
+    <p class="dlg-sub">You start with 100 points. A wrong guess costs 2, a hint 5, a reveal 10.</p>
     <button class="primary wide">Play</button>
   </form>
 </dialog>
