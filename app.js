@@ -456,7 +456,9 @@ try {
   const [p, f, n] = await Promise.all(['puzzles', 'films', 'people'].map((x) => getJson(`data/${x}.json`)));
   puzzles = p; filmIndex = indexOf(f); peopleIndex = indexOf(n);
   $('game').hidden = false;
-  open(released());
+  // ?p=7 opens any puzzle by number, released or not, for testing.
+  const asked = Number(new URLSearchParams(location.search).get('p'));
+  open(asked >= 1 && asked <= puzzles.length ? asked : released());
   if (!store.seenHelp) { store.seenHelp = true; save(); $('dlg-help').showModal(); }
 } catch {
   $('load-error').hidden = false;
