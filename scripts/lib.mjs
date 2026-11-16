@@ -136,10 +136,11 @@ export function buildGrid(pool, filmIds, linkId, minPeople = 4) {
   for (const f of fs) for (const id of new Set([...f.dirSet, ...f.cast.slice(0, 8).map((c) => c[0])])) count.set(id, (count.get(id) ?? 0) + 1);
   let people = [...count].filter(([id, n]) => n >= 2 && id !== linkId).map(([id]) => id);
   if (people.length < minPeople) return null;
-  // Keep at most six: most connected, then most popular. Then order them
-  // arbitrarily so the column order gives nothing away.
+  // Keep at most six: most connected, then most popular. Then order them by
+  // where their films sit, so the connecting lines cross as little as possible.
   people.sort((a, b) => count.get(b) - count.get(a) || pool.people[b][2] - pool.people[a][2]);
-  people = people.slice(0, 6).sort((a, b) => (Math.imul(a, 2654435761) >>> 0) - (Math.imul(b, 2654435761) >>> 0));
+  const centre = (id) => { const at = fs.flatMap((f, i) => (f.dirSet.has(id) || f.anyCast.has(id) ? [i] : [])); return at.reduce((x, y) => x + y, 0) / at.length; };
+  people = people.slice(0, 6).sort((a, b) => centre(a) - centre(b) || a - b);
   const cells = [];
   for (const [fi, f] of fs.entries()) for (const [pi, id] of people.entries()) {
     const d = f.dirSet.has(id), c = f.anyCast.has(id);

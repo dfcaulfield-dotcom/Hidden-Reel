@@ -30,37 +30,63 @@
 </header>
 
 <main id="game" hidden>
-  <section class="results" id="results" hidden>
-    <p class="eyebrow">The missing name</p>
-    <div class="link-reveal">
-      <img id="res-portrait" alt="">
-      <div>
-        <h2 id="res-name"></h2>
-        <p id="res-job"></p>
+  <div class="play">
+    <p class="status" id="status" aria-live="polite"></p>
+    <section class="board" id="board" aria-label="Films and the people who connect them">
+      <svg id="wires" aria-hidden="true"></svg>
+      <div class="group films" id="films"></div>
+      <div class="group people" id="people"></div>
+    </section>
+    <p class="legend">
+      <span><i class="wire d"></i> directed</span>
+      <span><i class="wire a"></i> acted in</span>
+      <span>no line, no credit</span>
+    </p>
+    <div id="link-slot"></div>
+  </div>
+
+  <div class="side">
+    <section class="results" id="results" hidden>
+      <p class="eyebrow">The missing name</p>
+      <div class="link-reveal">
+        <img id="res-portrait" alt="">
+        <div>
+          <h2 id="res-name"></h2>
+          <p id="res-job"></p>
+        </div>
       </div>
-    </div>
-    <div class="stills" id="res-stills"></div>
-    <div class="score-row">
-      <div class="score"><span id="res-score"></span><small>/100</small></div>
-      <pre class="grid-line" id="res-grid"></pre>
-    </div>
-    <button class="primary wide" id="btn-share">Share result</button>
-    <p class="next-up" id="next-up"></p>
-  </section>
+      <div class="stills" id="res-stills"></div>
+      <div class="score-row">
+        <div class="score"><span id="res-score"></span><small>/100</small></div>
+        <pre class="grid-line" id="res-grid"></pre>
+      </div>
+      <button class="primary wide" id="btn-share">Share result</button>
+      <p class="next-up" id="next-up"></p>
+    </section>
 
-  <p class="status" id="status" aria-live="polite"></p>
-
-  <section class="board-wrap" aria-label="Credit grid">
-    <table class="board" id="board"></table>
-    <p class="legend"><span class="mark d">D</span> directed <span class="mark a">A</span> acted in <span class="blank">blank</span> no credit</p>
-  </section>
-
-  <h2 class="list-title">Films</h2>
-  <ul class="items" id="list-films"></ul>
-  <h2 class="list-title">People</h2>
-  <ul class="items" id="list-people"></ul>
-  <h2 class="list-title">The missing name</h2>
-  <ul class="items" id="list-link"></ul>
+    <div class="scrim" id="scrim" hidden></div>
+    <aside class="panel" id="panel" aria-live="polite">
+      <div class="item-head">
+        <h2 id="item-title"></h2>
+        <button class="icon-btn small" id="item-close" aria-label="Close">✕</button>
+      </div>
+      <div id="item-solved" hidden>
+        <img id="item-image" alt="">
+        <p id="item-answer"></p>
+      </div>
+      <ul class="facts" id="item-facts"></ul>
+      <p class="locked-note" id="item-locked" hidden></p>
+      <div id="item-entry">
+        <ul class="wrong" id="item-wrong"></ul>
+        <input id="item-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
+        <ul class="suggest" id="item-suggest"></ul>
+        <div class="item-actions">
+          <button class="ghost" id="item-hint"></button>
+          <button class="ghost" id="item-reveal"></button>
+        </div>
+      </div>
+    </aside>
+  </div>
 </main>
 
 <p class="load-error" id="load-error" hidden>Couldn't load today's puzzle. Check your connection and reload.</p>
@@ -70,38 +96,17 @@
   This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
 </footer>
 
-<dialog id="dlg-item">
-  <div class="item-head">
-    <h2 id="item-title"></h2>
-    <button class="icon-btn small" id="item-close" aria-label="Close">✕</button>
-  </div>
-  <div id="item-solved" hidden>
-    <img id="item-image" alt="">
-    <p id="item-answer"></p>
-  </div>
-  <ul class="facts" id="item-facts"></ul>
-  <div id="item-entry">
-    <ul class="wrong" id="item-wrong"></ul>
-    <input id="item-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="search">
-    <ul class="suggest" id="item-suggest"></ul>
-    <div class="item-actions">
-      <button class="ghost" id="item-hint"></button>
-      <button class="ghost" id="item-reveal">Reveal · −10</button>
-    </div>
-  </div>
-</dialog>
-
 <dialog id="dlg-help">
   <form method="dialog">
     <h2>How to play</h2>
-    <p>The grid is a set of real film credits with the names removed. Work out all of it.</p>
+    <p>Five films and the people who made them, with every name removed. Work out all of it.</p>
     <ol class="help">
-      <li><b>Five films</b> (A to E). You're given the year and the shape of each title.</li>
-      <li><b>The people</b> (numbered). Each one directed or acted in at least two of the films. You're given a birth year and the shape of the name.</li>
-      <li><b>The grid</b> shows who did what. <b>D</b> is directed, <b>A</b> is acted in (among the ten top-billed). A blank means no credit on that film at all.</li>
-      <li><b>The missing name.</b> One more person worked on all five films and isn't on the grid. That's the hidden reel.</li>
+      <li><b>Lines are credits.</b> A gold line means that person directed that film. A pale line means they acted in it (among the ten top-billed). No line means no credit at all.</li>
+      <li><b>You get the shapes.</b> Each film shows its year and the letter count of its title. Each person shows a birth year and the letter count of their name.</li>
+      <li><b>Start with the marked film.</b> It comes with a free clue. Each answer you find unlocks whatever it's connected to.</li>
+      <li><b>Find the missing name.</b> One more actor or director is credited on all five films but isn't shown. It unlocks once you have all five films.</li>
     </ol>
-    <p>Every grid has exactly one solution. There's no clock, so take your time; pen and paper help.</p>
+    <p>Every puzzle has exactly one solution. There's no clock, so take your time; pen and paper help.</p>
     <p class="dlg-sub">You start with 100 points. A wrong guess costs 2, a hint costs 5, and revealing an answer costs 10. Solve everything unaided and you keep all 100.</p>
     <button class="primary wide">Play</button>
   </form>

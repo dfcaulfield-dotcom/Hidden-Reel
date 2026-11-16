@@ -1,12 +1,15 @@
 # Hidden Reel
 
-A daily film deduction puzzle. Each puzzle is a grid of real film credits with
-the names removed: five films, the directors and actors who connect them, and
-one more person who worked on all five but isn't on the grid. Work out all of it.
+A daily film deduction puzzle. Each puzzle shows five films and the directors
+and actors who connect them, with every name removed. Lines between them are
+real credits. One more actor or director is credited on all five films but
+isn't shown: that's the missing name. Work out all of it.
 
-You get each film's year and the shape of its title, each person's birth year
-and the shape of their name, and a grid showing who directed or acted in what.
-Every puzzle has exactly one solution.
+You get each film's year and the shape of its title, and each person's birth
+year and the shape of their name. One film is marked as the start and comes
+with a free clue. Each answer unlocks whatever it is connected to, and the
+missing name unlocks once all five films are found. Every puzzle has exactly
+one solution.
 
 ## Play locally
 

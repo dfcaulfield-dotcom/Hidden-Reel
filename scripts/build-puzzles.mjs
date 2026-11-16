@@ -5,7 +5,7 @@
 //   data/people.json   people names for the answer search
 // Every puzzle is re-checked to have exactly one solution within the pool.
 //   TMDB_TOKEN=... node scripts/build-puzzles.mjs
-import { loadPool, buildGrid, isUnique, tmdb, pooled, readJson, writeJson, LINK_JOBS, enumerate } from './lib.mjs';
+import { loadPool, buildGrid, isUnique, tmdb, pooled, readJson, writeJson, enumerate } from './lib.mjs';
 
 const pool = await loadPool();
 const source = await readJson('puzzles/source.json');
@@ -22,7 +22,13 @@ const words = (t) => t.toLowerCase().match(/[a-z0-9]{4,}/g) ?? [];
 function filmHint(f) {
   const base = `${f.genres.slice(0, 3).join(', ')} · ${f.runtime} min`;
   const leaks = f.tagline && words(f.title).some((w) => f.tagline.toLowerCase().includes(w));
-  return f.tagline && !leaks ? `${base}. Tagline: “${f.tagline.replace(/[.]$/, '')}.”` : base;
+  return f.tagline && !leaks ? `${base}. Tagline: “${f.tagline.trim()}”` : `${base}.`;
+}
+// The free clue on the starting film: genre, tagline and the two lead characters.
+function starterClue(f) {
+  const leaks = (text) => words(f.title).some((w) => text.toLowerCase().includes(w));
+  const chars = f.cast.slice(0, 4).map((c) => (c[1] ?? '').replace(/\(.*?\)/g, '').split(' / ').map((x) => x.trim()).find((x) => x && !leaks(x))).filter(Boolean).slice(0, 2);
+  return `${filmHint(f)}${chars.length ? ` Lead characters: ${chars.join(' and ')}.` : ''}`;
 }
 function personHint(id, grid) {
   const inGrid = new Set(grid.films.map((f) => f.id));
@@ -40,27 +46,30 @@ for (const [i, src] of source.entries()) {
   if (!g) throw new Error(`Puzzle ${i + 1}: films don't form a connected grid`);
   if (!isUnique(pool, g)) throw new Error(`Puzzle ${i + 1}: more than one solution`);
 
-  // The link: how the hidden person is credited, and anyone else off the grid who is on all five.
-  const creditIn = (f, id) => f.crew.find((c) => c[0] === id && LINK_JOBS[c[1]])?.[1] ?? (f.anyCast.has(id) ? 'actor' : f.dirSet.has(id) ? 'director' : null);
-  const jobs = g.films.map((f) => creditIn(f, src.link));
-  if (jobs.some((j) => !j)) throw new Error(`Puzzle ${i + 1}: link is not on all five films`);
-  const job = jobs.every((j) => j === 'actor') ? 'actor' : LINK_JOBS[jobs.find((j) => j !== 'actor')];
-  const everyone = (f) => new Set([...f.dirSet, ...f.anyCast, ...f.crew.map((c) => c[0])]);
+  // The missing name: an actor or director credited on all five films and absent from the grid.
+  const directed = g.films.filter((f) => f.dirSet.has(src.link));
+  if (!g.films.every((f) => f.dirSet.has(src.link) || f.anyCast.has(src.link))) throw new Error(`Puzzle ${i + 1}: link is not on all five films`);
+  const everyone = (f) => new Set([...f.dirSet, ...f.anyCast]);
   const also = [...everyone(g.films[0])].filter((id) => id !== src.link && !g.people.includes(id) && g.films.every((f) => everyone(f).has(id)));
+  const acts = g.films.filter((f) => f.anyCast.has(src.link)).length;
+  const role = !directed.length ? 'Acts in all five films'
+    : acts === 5 ? `Acts in all five films, and directed ${directed.map((f) => f.title).join(' and ')}`
+    : `Directed ${directed.map((f) => f.title).join(' and ')}, and acts in the other${acts > 1 ? 's' : ''}`;
+
+  // The starting film: the best known of the five, with a free clue.
+  const start = g.films.indexOf(g.films.reduce((a, f) => (f.votes > a.votes ? f : a)));
 
   const link = await person(src.link);
   const people = await pooled(g.people, 4, person);
   puzzles.push({
     id: i + 1,
-    films: g.films.map((f) => ({ id: f.id, title: f.title, year: f.year, enum: f.enum, poster: f.poster, backdrop: f.backdrop, hint: filmHint(f) })),
+    start,
+    films: g.films.map((f, fi) => ({ id: f.id, title: f.title, year: f.year, enum: f.enum, poster: f.poster, backdrop: f.backdrop, hint: fi === start ? starterClue(f) : filmHint(f) })),
     people: people.map((p) => ({ ...p, enum: enumerate(p.name), hint: personHint(p.id, g) })),
     cells: g.cells,
-    link: {
-      ...link, enum: enumerate(link.name), job, accept: [src.link, ...also],
-      hint: job === 'actor' ? 'They act in all five films, never in the lead.' : `They were the ${job} on all five films.`,
-    },
+    link: { ...link, enum: enumerate(link.name), role, accept: [src.link, ...also], hint: `Born in ${link.born}. ${personHint(src.link, g)}` },
   });
-  console.log(`${i + 1}. ${link.name} (${job})${also.length ? ' also: ' + also.map((id) => pool.people[id][0]).join(', ') : ''}`);
+  console.log(`${i + 1}. ${link.name} | start: ${g.films[start].title} | ${puzzles.at(-1).films[start].hint}${also.length ? ' also: ' + also.map((id) => pool.people[id][0]).join(', ') : ''}`);
 }
 await writeJson('.cache/persons.json', [...prev.values()]);
 await writeJson('data/puzzles.json', puzzles, true);
